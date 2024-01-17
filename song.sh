@@ -46,7 +46,16 @@ getSongId() {
   elif [[ $playerName == "netease-cloud-music" ]]; then
     jsonPath="$HOME/.cache/netease-cloud-music/StorageCache/webdata/file/queue"
     echo $(jq -r '.[]|.track.name,.track.id' $jsonPath | grep -A 1 "$title" | sed -n '2p')
+  elif [[ $playerName == "yesplaymusic" ]]; then
+    echo $(curl -s http://127.0.0.1:27232/player | jq -r .currentTrack.id)
+  elif [[ $playerName == "musicfox" ]]; then
+    echo $($playerShell metadata mpris:trackid | cut -d "/" -f5 | cut -d "'" -f1)
+  elif [[ $playerName == "Qcm" ]]; then
+    echo $($playerShell metadata mpris:trackid | cut -d "/" -f3 | cut -d "'" -f1)
+  elif [[ $playerName == "NeteaseCloudMusicGtk4" ]]; then
+    echo $($playerShell metadata mpris:trackid | cut -d "/" -f6 | cut -d "'" -f1)
   fi
+
 }
 
 getSongMedia(){
