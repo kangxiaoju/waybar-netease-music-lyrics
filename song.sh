@@ -78,7 +78,7 @@ notifySongInfo(){
   # 下载图片
   curl -s -L $icon -o "$songIcons/$songId.$iconSu"
   # 弹出提示框
-  notify-send -h string:x-dunst-stack-tag:music "$title-$artist" $album -t 800 --icon "$songIcons/$songId.$iconSu"
+  notify-send -h string:x-dunst-stack-tag:music "$title-$artist" "$album" -t 800 --icon "$songIcons/$songId.$iconSu"
 }
 
 title(){
