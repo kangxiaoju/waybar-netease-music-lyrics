@@ -61,7 +61,14 @@ getSongId() {
 getSongMedia(){
   songId=$1
   # 请求歌词
-  curl -s http://music.163.com/api/song/media?id=$songId | jq -r '.lyric' >> $lyricsPath
+  case "$playerName" in
+    "feeluown")
+      fuo show fuo://qqmusic/songs/$(playerctl --player=feeluown metadata mpris:trackid | cut -d '/' -f7)/lyric >> $lyricsPath
+      ;;
+    *)
+      curl -s http://music.163.com/api/song/media?id=$songId | jq -r '.lyric' >> $lyricsPath
+      ;;
+  esac
 }
 
 # 下载歌曲图片
